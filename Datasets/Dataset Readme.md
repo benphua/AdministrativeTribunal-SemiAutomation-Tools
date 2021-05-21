@@ -1,4 +1,4 @@
-Note: The acronyms RT.2 and BC.1 – 4 are as per S.3.1 of the main thesis.
+**Note**: The acronyms RT.2 and BC.1 – 4 are as per S.3.1 of the main thesis.
 
 ### More Effort
 
