@@ -1,10 +1,12 @@
 **Note**: The acronyms RT.1 & RT.2 and BC.1 – 4 are as per Methodology section of main publication, please review there.
 
+<br>
+
 ## Datasets Introduction
 
 This folder contains datasets ordered by the experiment to which they were used for.
 
-1. UK Information Rights (Freedom of Information) Tribunal Dataset.csv
+### 1. UK Information Rights (Freedom of Information) Tribunal Dataset.csv
 
 This dataset contains all data variables for each UK Information Rights case published on the UK Information Rights Decision Database until July 2020. The csv file also contains the raw text of each relevant decision report. 
 
@@ -36,15 +38,16 @@ txt: Contains the raw text as extracted from the pdf/ html links and then conver
 
 <br>
 
-2. RT.X/ BC.X Training Set and Test Set
+### 2. RT.X/ BC.Y Training Set and Test Set (Where X and Y are numbers)
 
 The rest of the datasets are experimental datasets which were labelled for variables to be trained and tested. Please read main publication for details.
+
+<br>
 
 
 ## Notes to Datasets for Future Tribunal Content Analysis Empirical Researchers
 
 ### More Effort to Code RT.2 Metadata
-
 
 We noted in data collection section of the main publication that RT.2 classes were harder to identify than RT.1 metadata. RT.1 metadata could be identified usually from the first or last pages of each report that consists of usually 9 to 20 pages (or more). 
 
