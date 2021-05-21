@@ -1,6 +1,6 @@
 **Note**: The acronyms RT.2 and BC.1 – 4 are as per S.3.1 of the main thesis.
 
-### More Effort
+### More Effort to Code RT.2 Metadata
 
 
 We noted in S.3.2.2 of the main thesis that RT.2 classes were harder to identify than RT.1 metadata. RT.1 metadata could be identified usually from the first or last pages of each report that consists of usually 9 to 20 pages (or more). 
@@ -9,7 +9,7 @@ RT.2 classes however, usually required reading whole sections of the report to i
 
 <br>
 
-### Basic Procedure
+### Basic Procedure for RT.2 Datasets
 
 RT.2 datasets for training and testing purposes were difficult to create due the rarity of some BC.1 – 4 classes as per our discussion in S.3.2.2 of the main thesis.
 
@@ -19,7 +19,10 @@ To make time for more data preparation, we had to be more efficient elsewhere wh
 
 As some reports would have multiple classes which would be relevant to more than one RT.2 experiment (e.g. one report may have classifications for BC.1, BC.2 and BC.4), the datasets for each BC ended up with differing numbers as it would impossible to know which reports would have what classifications available and we did not want any additional classifications to go to waste.
 
-BC.1 Training/ Test Set Sizes
+<br>
+
+### RT.2 - BC.1 Training/ Test Set Sizes
+
 We will also note that BC.1’s training and test set are far larger than BC.2 – 4. The reason for this was the optimality of System A as described in S.3.3. From the results in S.4.1 we saw that System A could extract MD.1 Appeal Outcome from reports at 100% precision and 100% recall because of how rigid the HTML structure was on the UK Freedom of Information (FOI) tribunal website and it would likely always result in 100% precision and recall in our dataset given the logic we discussed in S.3.3.1 of the main thesis and Appendix C.1.1.
 
 One will note that MD.1 (Appeal Outcome) and BC.1 (The Appeal Outcome) are actually the multi-class problem and binary class problem of the same variable (Appeal Outcome). MD.1 Appeal Outcome has about 6 primary outcomes (“Allowed”, “Dismissed”, “Consent Order”, etc.) possible (among many, many variants) and we only want to know a sub-set for BC.1 being “Allowed” or “Dismissed”.
