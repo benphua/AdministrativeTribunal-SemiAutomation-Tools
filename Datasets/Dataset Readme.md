@@ -1,9 +1,52 @@
-**Note**: The acronyms RT.2 and BC.1 – 4 are as per S.3.1 of the main thesis.
+**Note**: The acronyms RT.1 & RT.2 and BC.1 – 4 are as per Methodology section of main publication, please review there.
+
+## Datasets Introduction
+
+This folder contains datasets ordered by the experiment to which they were used for.
+
+1. UK Information Rights (Freedom of Information) Tribunal Dataset.csv
+
+This dataset contains all data variables for each UK Information Rights case published on the UK Information Rights Decision Database until July 2020. The csv file also contains the raw text of each relevant decision report. 
+
+The data variable table was generated using the webscrapper (uk_ir_website_scrapper.R) for the UK Information Rights Tribunal Decision Database: https://informationrights.decisions.tribunals.gov.uk/Public/search.aspx
+
+Key attributes are the following:
+
+*Note: "declared" means as per the website's information, from our coding activities, this is mostly correct but not always*
+
+Reference.1.Original: The Case Government Identitifier(s) in raw form, i.e. could contain multiple IDs if decision report is in regard to multiple appeals. 
+
+Date of Promulgation Decision Original: The declared "date" of the case as per the website.
+
+Case.Title: being the case title given to the case
+
+Appellant: being the Appellant name(s) in the case
+
+Respondent.1: being the respondent in the case
+
+Appeal.original: The declared outcome of the case (E.g. Allowed, Dismissed, Struck Out, etc.) 
+
+Jurisdictional.area.1.original: The declared first Jusrisdictional area of the case, the Judiciary staff stopped updating this from 1 Apr 2019
+
+Jurisdictional.area.2.original: The declared first Jusrisdictional area of the case, the Judiciary staff stopped updating this from 1 Apr 2019
+
+Link: The URL to the full decision report, mostly in PDF with machine readable text or or a scanned image as a PDF, and in some rare cases a HTML file.
+
+txt: Contains the raw text as extracted from the pdf/ html links and then converted to text using the "uk_pdf_downloader_textconverter.R" program. Details of text pre-processing in that script.
+
+<br>
+
+2. RT.X/ BC.X Training Set and Test Set
+
+The rest of the datasets are experimental datasets which were labelled for variables to be trained and tested. Please read main publication for details.
+
+
+## Notes to Datasets for Future Tribunal Content Analysis Empirical Researchers
 
 ### More Effort to Code RT.2 Metadata
 
 
-We noted in S.3.2.2 of the main thesis that RT.2 classes were harder to identify than RT.1 metadata. RT.1 metadata could be identified usually from the first or last pages of each report that consists of usually 9 to 20 pages (or more). 
+We noted in data collection section of the main publication that RT.2 classes were harder to identify than RT.1 metadata. RT.1 metadata could be identified usually from the first or last pages of each report that consists of usually 9 to 20 pages (or more). 
 
 RT.2 classes however, usually required reading whole sections of the report to identify and as such required far more time to do.
 
