@@ -1,0 +1,124 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+# PRELIMINARY WORK
+
+```{r}
+# Import Libraries
+library(tidyverse)
+library(tidytext)
+library(tidymodels)
+library(discrim) # needed for Naive Bayes
+library(textrecipes)
+library(tictoc)
+library(beepr)
+library(writexl)
+```
+
+```{r}
+# Import Data
+e_split <- readRDS("e1bal_split.RDS")
+e_train <- readRDS("e1bal_train.RDS")
+e_test <- readRDS("e1bal_test.RDS")
+train_folds <- readRDS("e1bal_train_folds.RDS")
+```
+
+# EVALUATION PARAMETERS
+
+```{r}
+classification_measure <- metric_set(accuracy, precision, recall, f_meas, roc_auc, npv, specificity)
+```
+
+# FINAL MODEL
+
+```{r}
+# Preprocessing Final Hyperparameters
+e_preprocessing <-
+  recipe(Topic ~ txt, # Model Target Variable = Class, Predictor Variable = Txt
+         data = e_train # estimated upon training set and are applied the same way on the test set
+  )
+
+e_preprocessing <- e_preprocessing %>%
+  step_tokenize(txt, token = "ngrams", options = list(n = 3, n_min = 1)) %>% # n-gram tokeniser best = unigrams, bigrams and trigrams
+  step_stopwords(txt) %>% 
+  step_tokenfilter(txt, min_times = 2, max_tokens = 500) %>% # token keeper/ remover, best = 2500
+  step_tfidf(txt) %>% # best parameter =  tf-idf
+  step_normalize(all_predictors()) # normalise all features
+```
+
+```{r}
+# Final Model Specifications
+nb_spec <- naive_Bayes(smoothness = NULL, Laplace = NULL) %>%
+  # smoothness is for klaR on L2, Laplace correction for smoothing low-frequency counts
+  set_mode("classification") %>%
+  set_engine("naivebayes") # high performance implementation of naive bayes
+
+# Create workflow object with only the model
+model_wf <- workflow() %>%
+  add_model(nb_spec)
+
+model_wf <- model_wf %>%
+  add_recipe(e_preprocessing)
+```
+
+```{r}
+# Final Fit
+set.seed(123)
+tic()
+# Train model on training data 
+model_fit <- model_wf %>%
+  fit(data = e_train)
+toc()
+beep("complete")
+```
+
+```{r}
+# Test  model on test data
+pred <- predict(model_fit, new_data = e_test, type = "class")
+```
+
+```{r}
+#combine truth with pred
+df <- cbind(e_test, pred = pred$.pred_class)
+```
+
+```{r}
+#glimpse(df)
+```
+
+```{r}
+df <- df %>%
+  select(Topic, pred)
+```
+
+```{r}
+multi_metric <- metric_set(accuracy, precision, recall, f_meas, npv, specificity)
+```
+
+```{r}
+metrics <- multi_metric(df, truth = Topic, estimate = pred)
+```
+
+```{r}
+pred2 <- predict(model_fit, new_data = e_test, type = "prob")
+```
+
+```{r}
+df <- cbind(df, pred2)
+```
+
+```{r}
+# metrics
+write_xlsx(metrics, path = "metrics.xlsx")
+# predictions
+write_xlsx(df, path = "predictions.xlsx")
+```
+
+```{r}
+df %>%
+  conf_mat(truth = Topic, estimate = pred) %>% # truth is the column which contains target labels
+  autoplot(type = "heatmap")
+```
+

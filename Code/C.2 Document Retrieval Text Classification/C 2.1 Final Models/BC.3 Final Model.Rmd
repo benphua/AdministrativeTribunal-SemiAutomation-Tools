@@ -1,0 +1,157 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+# INSTALL MODEL LIBRARY
+
+```{r}
+# Import Libraries
+library(tidyverse)
+library(tidytext)
+library(tidymodels)
+library(discrim) # needed for Naive Bayes
+library(textrecipes)
+library(tictoc)
+library(beepr)
+library(writexl)
+```
+
+```{r}
+# Import Data
+e_split <- readRDS("e2_split.RDS")
+e_train <- readRDS("e2_train.RDS")
+train_folds <- readRDS("e2_train_folds.RDS")
+```
+
+```{r}
+#e_test <- readRDS("e2_test.RDS")
+e_test <- readRDS("e2_test_df.RDS")
+```
+
+```{r}
+# Check size of test set relative to training set
+#150/(242+150)
+```
+
+```{r}
+classification_measure <- metric_set(accuracy, precision, recall, f_meas, roc_auc, npv, specificity)
+```
+
+```{r}
+e_preprocessing <-
+  recipe(Class ~ txt, # Model Target Variable = Class, Predictor Variable = Txt
+         data = e_train # estimated upon training set and are applied the same way on the test set
+  )
+```
+
+# UPDATE PREPROCESSOR HYPERPARAMETERS
+
+```{r}
+# UPDATE FOR EACH MODEL
+e_preprocessing <- e_preprocessing %>%
+  step_tokenize(txt, token = "ngrams", options = list(n = 1)) %>% # n-gram tokeniser set best param
+  step_stopwords(txt) %>% 
+  step_tokenfilter(txt, min_times = 2, max_tokens = 2500) %>% # token keeper/ remover set best param
+  step_tf(txt) %>% # best parameter 
+  step_normalize(all_predictors()) 
+```
+
+# UPDATE MODEL WITH MODEL AND HYPERPARAMETERS
+
+```{r}
+# UPDATE FOR EACH MODEL
+# Final Model Specifications
+model_spec <-logistic_reg(penalty = 0.04037017, mixture = 0.122449) %>%
+  set_engine("glmnet")
+
+# Create workflow object with only the model
+model_wf <- workflow() %>%
+  add_model(model_spec)
+
+model_wf <- model_wf %>%
+  add_recipe(e_preprocessing)
+```
+
+```{r}
+# Final Fit
+set.seed(123)
+tic()
+# Train model on training data 
+model_fit <- model_wf %>%
+  fit(data = e_train)
+toc()
+```
+
+```{r}
+# Test  model on test data
+pred <- predict(model_fit, new_data = e_test, type = "class")
+  # it is smart enough to know "txt" is needed
+```
+
+```{r}
+#combine truth with pred
+df <- cbind(e_test, pred = pred$.pred_class)
+```
+
+```{r}
+df <- df %>%
+  select(Class, pred)
+```
+
+```{r}
+multi_metric <- metric_set(accuracy, precision, recall, f_meas, npv, specificity)
+```
+
+```{r}
+metrics <- multi_metric(df, truth = Class, estimate = pred)
+```
+
+```{r}
+pred2 <- predict(model_fit, new_data = e_test, type = "prob")
+```
+
+```{r}
+df <- cbind(df, pred2)
+```
+
+# MOVE FILES
+
+```{r}
+# UPDATE
+# metrics
+write_xlsx(metrics, path = "metrics.xlsx")
+# predictions
+write_xlsx(df, path = "predictions.xlsx")
+```
+
+```{r}
+beep("complete")
+```
+
+```{r}
+#Confusion Matrix Check
+df %>%
+  conf_mat(truth = Class, estimate = pred) %>%
+  autoplot(type = "heatmap")
+```
+
+```{r}
+model_fit
+```
+
+
+```{r}
+# GLMNet Object
+glm_object <- pull_workflow_fit(model_fit)$fit
+```
+
+```{r}
+str(glm_object$beta)
+```
+
+
+```{r}
+
+```
+

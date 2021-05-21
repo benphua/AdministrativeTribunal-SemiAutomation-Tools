@@ -1,0 +1,153 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+# INSTALL MODEL LIBRARY
+
+```{r}
+# Import Libraries
+library(tidyverse)
+library(tidytext)
+library(tidymodels)
+library(discrim) # needed for Naive Bayes
+library(textrecipes)
+library(tictoc)
+library(beepr)
+library(writexl)
+```
+
+```{r}
+# Import Data
+e_split <- readRDS("e3_split.RDS")
+e_train <- readRDS("e3_train.RDS")
+e_test <- readRDS("e3_test.RDS")
+train_folds <- readRDS("e3_train_folds.RDS")
+```
+
+```{r}
+# Check size of test set relative to training set
+#150/(242+150)
+```
+
+```{r}
+classification_measure <- metric_set(accuracy, precision, recall, f_meas, roc_auc, npv, specificity)
+```
+
+```{r}
+e_preprocessing <-
+  recipe(Class ~ txt, # Model Target Variable = Class, Predictor Variable = Txt
+         data = e_train # estimated upon training set and are applied the same way on the test set
+  )
+```
+
+# UPDATE PREPROCESSOR HYPERPARAMETERS
+
+```{r}
+# UPDATE FOR EACH MODEL
+e_preprocessing <- e_preprocessing %>%
+  step_tokenize(txt, token = "ngrams", options = list(n = 2, n_min = 1)) %>% # n-gram tokeniser set best param
+  step_stopwords(txt) %>% 
+  step_tokenfilter(txt, min_times = 2, max_tokens = 12500) %>% # token keeper/ remover set best param
+  step_tf(txt) %>% # best parameter 
+  step_normalize(all_predictors()) 
+```
+
+# UPDATE MODEL WITH MODEL AND HYPERPARAMETERS
+
+```{r}
+# UPDATE FOR EACH MODEL
+# Final Model Specifications
+model_spec <-decision_tree(cost_complexity = 0.01) %>%
+  set_engine("rpart") %>%
+  set_mode("classification")
+
+# Create workflow object with only the model
+model_wf <- workflow() %>%
+  add_model(model_spec)
+
+model_wf <- model_wf %>%
+  add_recipe(e_preprocessing)
+```
+
+```{r}
+# Final Fit
+set.seed(123)
+tic()
+# Train model on training data 
+model_fit <- model_wf %>%
+  fit(data = e_train)
+toc()
+```
+
+```{r}
+# Test  model on test data
+pred <- predict(model_fit, new_data = e_test, type = "class")
+  # it is smart enough to know "txt" is needed
+```
+
+```{r}
+#combine truth with pred
+df <- cbind(e_test, pred = pred$.pred_class)
+```
+
+```{r}
+df <- df %>%
+  select(Class, pred)
+```
+
+```{r}
+multi_metric <- metric_set(accuracy, precision, recall, f_meas, npv, specificity)
+```
+
+```{r}
+metrics <- multi_metric(df, truth = Class, estimate = pred)
+```
+
+```{r}
+pred2 <- predict(model_fit, new_data = e_test, type = "prob")
+```
+
+```{r}
+df <- cbind(df, pred2)
+```
+
+# MOVE FILES
+
+```{r}
+# UPDATE
+# metrics
+write_xlsx(metrics, path = "metrics.xlsx")
+# predictions
+write_xlsx(df, path = "predictions.xlsx")
+```
+
+```{r}
+beep("complete")
+```
+
+```{r}
+#Confusion Matrix Check
+df %>%
+  conf_mat(truth = Class, estimate = pred) %>%
+  autoplot(type = "heatmap")
+```
+
+```{r}
+tree_fit <- model_fit %>%
+  pull_workflow_fit()
+
+```
+
+```{r}
+library(rpart.plot)
+```
+
+
+```{r}
+pdf("rplot.pdf")
+rpart.plot(tree_fit$fit)
+dev.off()
+```
+
+
