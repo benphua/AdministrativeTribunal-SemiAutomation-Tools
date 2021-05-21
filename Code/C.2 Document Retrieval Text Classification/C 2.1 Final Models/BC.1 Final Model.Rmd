@@ -17,10 +17,12 @@ library(beepr)
 library(writexl)
 ```
 
+Note if you are pulling this from the Github repository, please read README for e3_train_folds.md to get the needed file below
+
 ```{r}
 # Import Data
 e_split <- readRDS("e3_split.RDS")
-e_train <- readRDS("e3_train.RDS")
+e_train <- readRDS("e3_train.RDS") # see README for e3_train_folds.md in github repository
 e_test <- readRDS("e3_test.RDS")
 train_folds <- readRDS("e3_train_folds.RDS")
 ```

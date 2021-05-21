@@ -1796,8 +1796,9 @@ summary {
 <h1>INSTALL MODEL LIBRARY</h1>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBJbXBvcnQgTGlicmFyaWVzXG5saWJyYXJ5KHRpZHl2ZXJzZSlcbmxpYnJhcnkodGlkeXRleHQpXG5saWJyYXJ5KHRpZHltb2RlbHMpXG5saWJyYXJ5KGRpc2NyaW0pICMgbmVlZGVkIGZvciBOYWl2ZSBCYXllc1xubGlicmFyeSh0ZXh0cmVjaXBlcylcbmxpYnJhcnkodGljdG9jKVxubGlicmFyeShiZWVwcilcbmxpYnJhcnkod3JpdGV4bClcbmBgYCJ9 -->
-<pre class="r"><code># Import Libraries
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuIyBJbXBvcnQgTGlicmFyaWVzXG5saWJyYXJ5KHRpZHl2ZXJzZSlcbmxpYnJhcnkodGlkeXRleHQpXG5saWJyYXJ5KHRpZHltb2RlbHMpXG5saWJyYXJ5KGRpc2NyaW0pICMgbmVlZGVkIGZvciBOYWl2ZSBCYXllc1xubGlicmFyeSh0ZXh0cmVjaXBlcylcbmxpYnJhcnkodGljdG9jKVxubGlicmFyeShiZWVwcilcbmxpYnJhcnkod3JpdGV4bClcbmBgYFxuYGBgIn0= -->
+<pre class="r"><code>```r
+# Import Libraries
 library(tidyverse)
 library(tidytext)
 library(tidymodels)
@@ -1806,72 +1807,156 @@ library(textrecipes)
 library(tictoc)
 library(beepr)
 library(writexl)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBJbXBvcnQgRGF0YVxuZV9zcGxpdCA8LSByZWFkUkRTKFwiZTNfc3BsaXQuUkRTXCIpXG5lX3RyYWluIDwtIHJlYWRSRFMoXCJlM190cmFpbi5SRFNcIilcbmVfdGVzdCA8LSByZWFkUkRTKFwiZTNfdGVzdC5SRFNcIilcbnRyYWluX2ZvbGRzIDwtIHJlYWRSRFMoXCJlM190cmFpbl9mb2xkcy5SRFNcIilcbmBgYCJ9 -->
-<pre class="r"><code># Import Data
-e_split &lt;- readRDS(&quot;e3_split.RDS&quot;)
-e_train &lt;- readRDS(&quot;e3_train.RDS&quot;)
-e_test &lt;- readRDS(&quot;e3_test.RDS&quot;)
-train_folds &lt;- readRDS(&quot;e3_train_folds.RDS&quot;)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBDaGVjayBzaXplIG9mIHRlc3Qgc2V0IHJlbGF0aXZlIHRvIHRyYWluaW5nIHNldFxuIzE1MC8oMjQyKzE1MClcbmBgYCJ9 -->
-<pre class="r"><code># Check size of test set relative to training set
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+Note if you are pulling this from the Github repository, please read README for e3_train_folds.md to get the needed file below
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuIyBJbXBvcnQgRGF0YVxuZV9zcGxpdCA8LSByZWFkUkRTKFxcZTNfc3BsaXQuUkRTXFwpXG5lX3RyYWluIDwtIHJlYWRSRFMoXFxlM190cmFpbi5SRFNcXClcbmVfdGVzdCA8LSByZWFkUkRTKFxcZTNfdGVzdC5SRFNcXClcbnRyYWluX2ZvbGRzIDwtIHJlYWRSRFMoXFxlM190cmFpbl9mb2xkcy5SRFNcXClcbmBgYFxuYGBgIn0= --&gt;
+
+```r
+```r
+# Import Data
+e_split &lt;- readRDS(\e3_split.RDS\)
+e_train &lt;- readRDS(\e3_train.RDS\)
+e_test &lt;- readRDS(\e3_test.RDS\)
+train_folds &lt;- readRDS(\e3_train_folds.RDS\)</code></pre>
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuIyBDaGVjayBzaXplIG9mIHRlc3Qgc2V0IHJlbGF0aXZlIHRvIHRyYWluaW5nIHNldFxuIzE1MC8oMjQyKzE1MClcbmBgYFxuYGBgIn0= --&gt;
+
+```r
+```r
+# Check size of test set relative to training set
 #150/(242+150)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY2xhc3NpZmljYXRpb25fbWVhc3VyZSA8LSBtZXRyaWNfc2V0KGFjY3VyYWN5LCBwcmVjaXNpb24sIHJlY2FsbCwgZl9tZWFzLCByb2NfYXVjLCBucHYsIHNwZWNpZmljaXR5KVxuYGBgIn0= -->
-<pre class="r"><code>classification_measure &lt;- metric_set(accuracy, precision, recall, f_meas, roc_auc, npv, specificity)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZV9wcmVwcm9jZXNzaW5nIDwtXG4gIHJlY2lwZShDbGFzcyB+IHR4dCwgIyBNb2RlbCBUYXJnZXQgVmFyaWFibGUgPSBDbGFzcywgUHJlZGljdG9yIFZhcmlhYmxlID0gVHh0XG4gICAgICAgICBkYXRhID0gZV90cmFpbiAjIGVzdGltYXRlZCB1cG9uIHRyYWluaW5nIHNldCBhbmQgYXJlIGFwcGxpZWQgdGhlIHNhbWUgd2F5IG9uIHRoZSB0ZXN0IHNldFxuICApXG5gYGAifQ== -->
-<pre class="r"><code>e_preprocessing &lt;-
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuY2xhc3NpZmljYXRpb25fbWVhc3VyZSA8LSBtZXRyaWNfc2V0KGFjY3VyYWN5LCBwcmVjaXNpb24sIHJlY2FsbCwgZl9tZWFzLCByb2NfYXVjLCBucHYsIHNwZWNpZmljaXR5KVxuYGBgXG5gYGAifQ== --&gt;
+
+```r
+```r
+classification_measure &lt;- metric_set(accuracy, precision, recall, f_meas, roc_auc, npv, specificity)</code></pre>
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuZV9wcmVwcm9jZXNzaW5nIDwtXG4gIHJlY2lwZShDbGFzcyB+IHR4dCwgIyBNb2RlbCBUYXJnZXQgVmFyaWFibGUgPSBDbGFzcywgUHJlZGljdG9yIFZhcmlhYmxlID0gVHh0XG4gICAgICAgICBkYXRhID0gZV90cmFpbiAjIGVzdGltYXRlZCB1cG9uIHRyYWluaW5nIHNldCBhbmQgYXJlIGFwcGxpZWQgdGhlIHNhbWUgd2F5IG9uIHRoZSB0ZXN0IHNldFxuICApXG5gYGBcbmBgYCJ9 --&gt;
+
+```r
+```r
+e_preprocessing &lt;-
   recipe(Class ~ txt, # Model Target Variable = Class, Predictor Variable = Txt
          data = e_train # estimated upon training set and are applied the same way on the test set
   )</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="update-preprocessor-hyperparameters" class="section level1">
-<h1>UPDATE PREPROCESSOR HYPERPARAMETERS</h1>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBVUERBVEUgRk9SIEVBQ0ggTU9ERUxcbmVfcHJlcHJvY2Vzc2luZyA8LSBlX3ByZXByb2Nlc3NpbmcgJT4lXG4gIHN0ZXBfdG9rZW5pemUodHh0LCB0b2tlbiA9IFwibmdyYW1zXCIsIG9wdGlvbnMgPSBsaXN0KG4gPSAyLCBuX21pbiA9IDEpKSAlPiUgIyBuLWdyYW0gdG9rZW5pc2VyIHNldCBiZXN0IHBhcmFtXG4gIHN0ZXBfc3RvcHdvcmRzKHR4dCkgJT4lIFxuICBzdGVwX3Rva2VuZmlsdGVyKHR4dCwgbWluX3RpbWVzID0gMiwgbWF4X3Rva2VucyA9IDEyNTAwKSAlPiUgIyB0b2tlbiBrZWVwZXIvIHJlbW92ZXIgc2V0IGJlc3QgcGFyYW1cbiAgc3RlcF90Zih0eHQpICU+JSAjIGJlc3QgcGFyYW1ldGVyIFxuICBzdGVwX25vcm1hbGl6ZShhbGxfcHJlZGljdG9ycygpKSBcbmBgYCJ9 -->
-<pre class="r"><code># UPDATE FOR EACH MODEL
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+# UPDATE PREPROCESSOR HYPERPARAMETERS
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuIyBVUERBVEUgRk9SIEVBQ0ggTU9ERUxcbmVfcHJlcHJvY2Vzc2luZyA8LSBlX3ByZXByb2Nlc3NpbmcgJT4lXG4gIHN0ZXBfdG9rZW5pemUodHh0LCB0b2tlbiA9IFxcbmdyYW1zXFwsIG9wdGlvbnMgPSBsaXN0KG4gPSAyLCBuX21pbiA9IDEpKSAlPiUgIyBuLWdyYW0gdG9rZW5pc2VyIHNldCBiZXN0IHBhcmFtXG4gIHN0ZXBfc3RvcHdvcmRzKHR4dCkgJT4lIFxuICBzdGVwX3Rva2VuZmlsdGVyKHR4dCwgbWluX3RpbWVzID0gMiwgbWF4X3Rva2VucyA9IDEyNTAwKSAlPiUgIyB0b2tlbiBrZWVwZXIvIHJlbW92ZXIgc2V0IGJlc3QgcGFyYW1cbiAgc3RlcF90Zih0eHQpICU+JSAjIGJlc3QgcGFyYW1ldGVyIFxuICBzdGVwX25vcm1hbGl6ZShhbGxfcHJlZGljdG9ycygpKSBcbmBgYFxuYGBgIn0= --&gt;
+
+```r
+```r
+# UPDATE FOR EACH MODEL
 e_preprocessing &lt;- e_preprocessing %&gt;%
-  step_tokenize(txt, token = &quot;ngrams&quot;, options = list(n = 2, n_min = 1)) %&gt;% # n-gram tokeniser set best param
+  step_tokenize(txt, token = \ngrams\, options = list(n = 2, n_min = 1)) %&gt;% # n-gram tokeniser set best param
   step_stopwords(txt) %&gt;% 
   step_tokenfilter(txt, min_times = 2, max_tokens = 12500) %&gt;% # token keeper/ remover set best param
   step_tf(txt) %&gt;% # best parameter 
   step_normalize(all_predictors()) </code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="update-model-with-model-and-hyperparameters" class="section level1">
-<h1>UPDATE MODEL WITH MODEL AND HYPERPARAMETERS</h1>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBVUERBVEUgRk9SIEVBQ0ggTU9ERUxcbiMgRmluYWwgTW9kZWwgU3BlY2lmaWNhdGlvbnNcbm1vZGVsX3NwZWMgPC1kZWNpc2lvbl90cmVlKGNvc3RfY29tcGxleGl0eSA9IDAuMDEpICU+JVxuICBzZXRfZW5naW5lKFwicnBhcnRcIikgJT4lXG4gIHNldF9tb2RlKFwiY2xhc3NpZmljYXRpb25cIilcblxuIyBDcmVhdGUgd29ya2Zsb3cgb2JqZWN0IHdpdGggb25seSB0aGUgbW9kZWxcbm1vZGVsX3dmIDwtIHdvcmtmbG93KCkgJT4lXG4gIGFkZF9tb2RlbChtb2RlbF9zcGVjKVxuXG5tb2RlbF93ZiA8LSBtb2RlbF93ZiAlPiVcbiAgYWRkX3JlY2lwZShlX3ByZXByb2Nlc3NpbmcpXG5gYGAifQ== -->
-<pre class="r"><code># UPDATE FOR EACH MODEL
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+# UPDATE MODEL WITH MODEL AND HYPERPARAMETERS
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuIyBVUERBVEUgRk9SIEVBQ0ggTU9ERUxcbiMgRmluYWwgTW9kZWwgU3BlY2lmaWNhdGlvbnNcbm1vZGVsX3NwZWMgPC1kZWNpc2lvbl90cmVlKGNvc3RfY29tcGxleGl0eSA9IDAuMDEpICU+JVxuICBzZXRfZW5naW5lKFxccnBhcnRcXCkgJT4lXG4gIHNldF9tb2RlKFxcY2xhc3NpZmljYXRpb25cXClcblxuIyBDcmVhdGUgd29ya2Zsb3cgb2JqZWN0IHdpdGggb25seSB0aGUgbW9kZWxcbm1vZGVsX3dmIDwtIHdvcmtmbG93KCkgJT4lXG4gIGFkZF9tb2RlbChtb2RlbF9zcGVjKVxuXG5tb2RlbF93ZiA8LSBtb2RlbF93ZiAlPiVcbiAgYWRkX3JlY2lwZShlX3ByZXByb2Nlc3NpbmcpXG5gYGBcbmBgYCJ9 --&gt;
+
+```r
+```r
+# UPDATE FOR EACH MODEL
 # Final Model Specifications
 model_spec &lt;-decision_tree(cost_complexity = 0.01) %&gt;%
-  set_engine(&quot;rpart&quot;) %&gt;%
-  set_mode(&quot;classification&quot;)
+  set_engine(\rpart\) %&gt;%
+  set_mode(\classification\)
 
 # Create workflow object with only the model
 model_wf &lt;- workflow() %&gt;%
@@ -1879,135 +1964,332 @@ model_wf &lt;- workflow() %&gt;%
 
 model_wf &lt;- model_wf %&gt;%
   add_recipe(e_preprocessing)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBGaW5hbCBGaXRcbnNldC5zZWVkKDEyMylcbnRpYygpXG4jIFRyYWluIG1vZGVsIG9uIHRyYWluaW5nIGRhdGEgXG5tb2RlbF9maXQgPC0gbW9kZWxfd2YgJT4lXG4gIGZpdChkYXRhID0gZV90cmFpbilcbnRvYygpXG5gYGAifQ== -->
-<pre class="r"><code># Final Fit
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuIyBGaW5hbCBGaXRcbnNldC5zZWVkKDEyMylcbnRpYygpXG4jIFRyYWluIG1vZGVsIG9uIHRyYWluaW5nIGRhdGEgXG5tb2RlbF9maXQgPC0gbW9kZWxfd2YgJT4lXG4gIGZpdChkYXRhID0gZV90cmFpbilcbnRvYygpXG5gYGBcbmBgYCJ9 --&gt;
+
+```r
+```r
+# Final Fit
 set.seed(123)
 tic()
 # Train model on training data 
 model_fit &lt;- model_wf %&gt;%
   fit(data = e_train)
 toc()</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBUZXN0ICBtb2RlbCBvbiB0ZXN0IGRhdGFcbnByZWQgPC0gcHJlZGljdChtb2RlbF9maXQsIG5ld19kYXRhID0gZV90ZXN0LCB0eXBlID0gXCJjbGFzc1wiKVxuICAjIGl0IGlzIHNtYXJ0IGVub3VnaCB0byBrbm93IFwidHh0XCIgaXMgbmVlZGVkXG5gYGAifQ== -->
-<pre class="r"><code># Test  model on test data
-pred &lt;- predict(model_fit, new_data = e_test, type = &quot;class&quot;)
-  # it is smart enough to know &quot;txt&quot; is needed</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI2NvbWJpbmUgdHJ1dGggd2l0aCBwcmVkXG5kZiA8LSBjYmluZChlX3Rlc3QsIHByZWQgPSBwcmVkJC5wcmVkX2NsYXNzKVxuYGBgIn0= -->
-<pre class="r"><code>#combine truth with pred
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuIyBUZXN0ICBtb2RlbCBvbiB0ZXN0IGRhdGFcbnByZWQgPC0gcHJlZGljdChtb2RlbF9maXQsIG5ld19kYXRhID0gZV90ZXN0LCB0eXBlID0gXFxjbGFzc1xcKVxuICAjIGl0IGlzIHNtYXJ0IGVub3VnaCB0byBrbm93IFxcdHh0XFwgaXMgbmVlZGVkXG5gYGBcbmBgYCJ9 --&gt;
+
+```r
+```r
+# Test  model on test data
+pred &lt;- predict(model_fit, new_data = e_test, type = \class\)
+  # it is smart enough to know \txt\ is needed</code></pre>
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuI2NvbWJpbmUgdHJ1dGggd2l0aCBwcmVkXG5kZiA8LSBjYmluZChlX3Rlc3QsIHByZWQgPSBwcmVkJC5wcmVkX2NsYXNzKVxuYGBgXG5gYGAifQ== --&gt;
+
+```r
+```r
+#combine truth with pred
 df &lt;- cbind(e_test, pred = pred$.pred_class)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGYgPC0gZGYgJT4lXG4gIHNlbGVjdChDbGFzcywgcHJlZClcbmBgYCJ9 -->
-<pre class="r"><code>df &lt;- df %&gt;%
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuZGYgPC0gZGYgJT4lXG4gIHNlbGVjdChDbGFzcywgcHJlZClcbmBgYFxuYGBgIn0= --&gt;
+
+```r
+```r
+df &lt;- df %&gt;%
   select(Class, pred)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubXVsdGlfbWV0cmljIDwtIG1ldHJpY19zZXQoYWNjdXJhY3ksIHByZWNpc2lvbiwgcmVjYWxsLCBmX21lYXMsIG5wdiwgc3BlY2lmaWNpdHkpXG5gYGAifQ== -->
-<pre class="r"><code>multi_metric &lt;- metric_set(accuracy, precision, recall, f_meas, npv, specificity)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWV0cmljcyA8LSBtdWx0aV9tZXRyaWMoZGYsIHRydXRoID0gQ2xhc3MsIGVzdGltYXRlID0gcHJlZClcbmBgYCJ9 -->
-<pre class="r"><code>metrics &lt;- multi_metric(df, truth = Class, estimate = pred)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJlZDIgPC0gcHJlZGljdChtb2RlbF9maXQsIG5ld19kYXRhID0gZV90ZXN0LCB0eXBlID0gXCJwcm9iXCIpXG5gYGAifQ== -->
-<pre class="r"><code>pred2 &lt;- predict(model_fit, new_data = e_test, type = &quot;prob&quot;)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGYgPC0gY2JpbmQoZGYsIHByZWQyKVxuYGBgIn0= -->
-<pre class="r"><code>df &lt;- cbind(df, pred2)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="move-files" class="section level1">
-<h1>MOVE FILES</h1>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBVUERBVEVcbiMgbWV0cmljc1xud3JpdGVfeGxzeChtZXRyaWNzLCBwYXRoID0gXCJtZXRyaWNzLnhsc3hcIilcbiMgcHJlZGljdGlvbnNcbndyaXRlX3hsc3goZGYsIHBhdGggPSBcInByZWRpY3Rpb25zLnhsc3hcIilcbmBgYCJ9 -->
-<pre class="r"><code># UPDATE
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxubXVsdGlfbWV0cmljIDwtIG1ldHJpY19zZXQoYWNjdXJhY3ksIHByZWNpc2lvbiwgcmVjYWxsLCBmX21lYXMsIG5wdiwgc3BlY2lmaWNpdHkpXG5gYGBcbmBgYCJ9 --&gt;
+
+```r
+```r
+multi_metric &lt;- metric_set(accuracy, precision, recall, f_meas, npv, specificity)</code></pre>
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxubWV0cmljcyA8LSBtdWx0aV9tZXRyaWMoZGYsIHRydXRoID0gQ2xhc3MsIGVzdGltYXRlID0gcHJlZClcbmBgYFxuYGBgIn0= --&gt;
+
+```r
+```r
+metrics &lt;- multi_metric(df, truth = Class, estimate = pred)</code></pre>
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxucHJlZDIgPC0gcHJlZGljdChtb2RlbF9maXQsIG5ld19kYXRhID0gZV90ZXN0LCB0eXBlID0gXFxwcm9iXFwpXG5gYGBcbmBgYCJ9 --&gt;
+
+```r
+```r
+pred2 &lt;- predict(model_fit, new_data = e_test, type = \prob\)</code></pre>
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuZGYgPC0gY2JpbmQoZGYsIHByZWQyKVxuYGBgXG5gYGAifQ== --&gt;
+
+```r
+```r
+df &lt;- cbind(df, pred2)</code></pre>
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+# MOVE FILES
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuIyBVUERBVEVcbiMgbWV0cmljc1xud3JpdGVfeGxzeChtZXRyaWNzLCBwYXRoID0gXFxtZXRyaWNzLnhsc3hcXClcbiMgcHJlZGljdGlvbnNcbndyaXRlX3hsc3goZGYsIHBhdGggPSBcXHByZWRpY3Rpb25zLnhsc3hcXClcbmBgYFxuYGBgIn0= --&gt;
+
+```r
+```r
+# UPDATE
 # metrics
-write_xlsx(metrics, path = &quot;metrics.xlsx&quot;)
+write_xlsx(metrics, path = \metrics.xlsx\)
 # predictions
-write_xlsx(df, path = &quot;predictions.xlsx&quot;)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYmVlcChcImNvbXBsZXRlXCIpXG5gYGAifQ== -->
-<pre class="r"><code>beep(&quot;complete&quot;)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI0NvbmZ1c2lvbiBNYXRyaXggQ2hlY2tcbmRmICU+JVxuICBjb25mX21hdCh0cnV0aCA9IENsYXNzLCBlc3RpbWF0ZSA9IHByZWQpICU+JVxuICBhdXRvcGxvdCh0eXBlID0gXCJoZWF0bWFwXCIpXG5gYGAifQ== -->
-<pre class="r"><code>#Confusion Matrix Check
+write_xlsx(df, path = \predictions.xlsx\)</code></pre>
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuYmVlcChcXGNvbXBsZXRlXFwpXG5gYGBcbmBgYCJ9 --&gt;
+
+```r
+```r
+beep(\complete\)</code></pre>
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuI0NvbmZ1c2lvbiBNYXRyaXggQ2hlY2tcbmRmICU+JVxuICBjb25mX21hdCh0cnV0aCA9IENsYXNzLCBlc3RpbWF0ZSA9IHByZWQpICU+JVxuICBhdXRvcGxvdCh0eXBlID0gXFxoZWF0bWFwXFwpXG5gYGBcbmBgYCJ9 --&gt;
+
+```r
+```r
+#Confusion Matrix Check
 df %&gt;%
   conf_mat(truth = Class, estimate = pred) %&gt;%
-  autoplot(type = &quot;heatmap&quot;)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudHJlZV9maXQgPC0gbW9kZWxfZml0ICU+JVxuICBwdWxsX3dvcmtmbG93X2ZpdCgpXG5cbmBgYCJ9 -->
-<pre class="r"><code>tree_fit &lt;- model_fit %&gt;%
+  autoplot(type = \heatmap\)</code></pre>
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxudHJlZV9maXQgPC0gbW9kZWxfZml0ICU+JVxuICBwdWxsX3dvcmtmbG93X2ZpdCgpXG5cbmBgYFxuYGBgIn0= --&gt;
+
+```r
+```r
+tree_fit &lt;- model_fit %&gt;%
   pull_workflow_fit()
 </code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShycGFydC5wbG90KVxuYGBgIn0= -->
-<pre class="r"><code>library(rpart.plot)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGRmKFwicnBsb3QucGRmXCIpXG5ycGFydC5wbG90KHRyZWVfZml0JGZpdClcbmRldi5vZmYoKVxuYGBgIn0= -->
-<pre class="r"><code>pdf(&quot;rplot.pdf&quot;)
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxubGlicmFyeShycGFydC5wbG90KVxuYGBgXG5gYGAifQ== --&gt;
+
+```r
+```r
+library(rpart.plot)</code></pre>
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxucGRmKFxccnBsb3QucGRmXFwpXG5ycGFydC5wbG90KHRyZWVfZml0JGZpdClcbmRldi5vZmYoKVxuYGBgXG5gYGAifQ== --&gt;
+
+```r
+```r
+pdf(\rplot.pdf\)
 rpart.plot(tree_fit$fit)
 dev.off()</code></pre>
+<p>```</p>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKIyBJTlNUQUxMIE1PREVMIExJQlJBUlkKCmBgYHtyfQojIEltcG9ydCBMaWJyYXJpZXMKbGlicmFyeSh0aWR5dmVyc2UpCmxpYnJhcnkodGlkeXRleHQpCmxpYnJhcnkodGlkeW1vZGVscykKbGlicmFyeShkaXNjcmltKSAjIG5lZWRlZCBmb3IgTmFpdmUgQmF5ZXMKbGlicmFyeSh0ZXh0cmVjaXBlcykKbGlicmFyeSh0aWN0b2MpCmxpYnJhcnkoYmVlcHIpCmxpYnJhcnkod3JpdGV4bCkKYGBgCgpgYGB7cn0KIyBJbXBvcnQgRGF0YQplX3NwbGl0IDwtIHJlYWRSRFMoImUzX3NwbGl0LlJEUyIpCmVfdHJhaW4gPC0gcmVhZFJEUygiZTNfdHJhaW4uUkRTIikKZV90ZXN0IDwtIHJlYWRSRFMoImUzX3Rlc3QuUkRTIikKdHJhaW5fZm9sZHMgPC0gcmVhZFJEUygiZTNfdHJhaW5fZm9sZHMuUkRTIikKYGBgCgpgYGB7cn0KIyBDaGVjayBzaXplIG9mIHRlc3Qgc2V0IHJlbGF0aXZlIHRvIHRyYWluaW5nIHNldAojMTUwLygyNDIrMTUwKQpgYGAKCmBgYHtyfQpjbGFzc2lmaWNhdGlvbl9tZWFzdXJlIDwtIG1ldHJpY19zZXQoYWNjdXJhY3ksIHByZWNpc2lvbiwgcmVjYWxsLCBmX21lYXMsIHJvY19hdWMsIG5wdiwgc3BlY2lmaWNpdHkpCmBgYAoKYGBge3J9CmVfcHJlcHJvY2Vzc2luZyA8LQogIHJlY2lwZShDbGFzcyB+IHR4dCwgIyBNb2RlbCBUYXJnZXQgVmFyaWFibGUgPSBDbGFzcywgUHJlZGljdG9yIFZhcmlhYmxlID0gVHh0CiAgICAgICAgIGRhdGEgPSBlX3RyYWluICMgZXN0aW1hdGVkIHVwb24gdHJhaW5pbmcgc2V0IGFuZCBhcmUgYXBwbGllZCB0aGUgc2FtZSB3YXkgb24gdGhlIHRlc3Qgc2V0CiAgKQpgYGAKCiMgVVBEQVRFIFBSRVBST0NFU1NPUiBIWVBFUlBBUkFNRVRFUlMKCmBgYHtyfQojIFVQREFURSBGT1IgRUFDSCBNT0RFTAplX3ByZXByb2Nlc3NpbmcgPC0gZV9wcmVwcm9jZXNzaW5nICU+JQogIHN0ZXBfdG9rZW5pemUodHh0LCB0b2tlbiA9ICJuZ3JhbXMiLCBvcHRpb25zID0gbGlzdChuID0gMiwgbl9taW4gPSAxKSkgJT4lICMgbi1ncmFtIHRva2VuaXNlciBzZXQgYmVzdCBwYXJhbQogIHN0ZXBfc3RvcHdvcmRzKHR4dCkgJT4lIAogIHN0ZXBfdG9rZW5maWx0ZXIodHh0LCBtaW5fdGltZXMgPSAyLCBtYXhfdG9rZW5zID0gMTI1MDApICU+JSAjIHRva2VuIGtlZXBlci8gcmVtb3ZlciBzZXQgYmVzdCBwYXJhbQogIHN0ZXBfdGYodHh0KSAlPiUgIyBiZXN0IHBhcmFtZXRlciAKICBzdGVwX25vcm1hbGl6ZShhbGxfcHJlZGljdG9ycygpKSAKYGBgCgojIFVQREFURSBNT0RFTCBXSVRIIE1PREVMIEFORCBIWVBFUlBBUkFNRVRFUlMKCmBgYHtyfQojIFVQREFURSBGT1IgRUFDSCBNT0RFTAojIEZpbmFsIE1vZGVsIFNwZWNpZmljYXRpb25zCm1vZGVsX3NwZWMgPC1kZWNpc2lvbl90cmVlKGNvc3RfY29tcGxleGl0eSA9IDAuMDEpICU+JQogIHNldF9lbmdpbmUoInJwYXJ0IikgJT4lCiAgc2V0X21vZGUoImNsYXNzaWZpY2F0aW9uIikKCiMgQ3JlYXRlIHdvcmtmbG93IG9iamVjdCB3aXRoIG9ubHkgdGhlIG1vZGVsCm1vZGVsX3dmIDwtIHdvcmtmbG93KCkgJT4lCiAgYWRkX21vZGVsKG1vZGVsX3NwZWMpCgptb2RlbF93ZiA8LSBtb2RlbF93ZiAlPiUKICBhZGRfcmVjaXBlKGVfcHJlcHJvY2Vzc2luZykKYGBgCgpgYGB7cn0KIyBGaW5hbCBGaXQKc2V0LnNlZWQoMTIzKQp0aWMoKQojIFRyYWluIG1vZGVsIG9uIHRyYWluaW5nIGRhdGEgCm1vZGVsX2ZpdCA8LSBtb2RlbF93ZiAlPiUKICBmaXQoZGF0YSA9IGVfdHJhaW4pCnRvYygpCmBgYAoKYGBge3J9CiMgVGVzdCAgbW9kZWwgb24gdGVzdCBkYXRhCnByZWQgPC0gcHJlZGljdChtb2RlbF9maXQsIG5ld19kYXRhID0gZV90ZXN0LCB0eXBlID0gImNsYXNzIikKICAjIGl0IGlzIHNtYXJ0IGVub3VnaCB0byBrbm93ICJ0eHQiIGlzIG5lZWRlZApgYGAKCmBgYHtyfQojY29tYmluZSB0cnV0aCB3aXRoIHByZWQKZGYgPC0gY2JpbmQoZV90ZXN0LCBwcmVkID0gcHJlZCQucHJlZF9jbGFzcykKYGBgCgpgYGB7cn0KZGYgPC0gZGYgJT4lCiAgc2VsZWN0KENsYXNzLCBwcmVkKQpgYGAKCmBgYHtyfQptdWx0aV9tZXRyaWMgPC0gbWV0cmljX3NldChhY2N1cmFjeSwgcHJlY2lzaW9uLCByZWNhbGwsIGZfbWVhcywgbnB2LCBzcGVjaWZpY2l0eSkKYGBgCgpgYGB7cn0KbWV0cmljcyA8LSBtdWx0aV9tZXRyaWMoZGYsIHRydXRoID0gQ2xhc3MsIGVzdGltYXRlID0gcHJlZCkKYGBgCgpgYGB7cn0KcHJlZDIgPC0gcHJlZGljdChtb2RlbF9maXQsIG5ld19kYXRhID0gZV90ZXN0LCB0eXBlID0gInByb2IiKQpgYGAKCmBgYHtyfQpkZiA8LSBjYmluZChkZiwgcHJlZDIpCmBgYAoKIyBNT1ZFIEZJTEVTCgpgYGB7cn0KIyBVUERBVEUKIyBtZXRyaWNzCndyaXRlX3hsc3gobWV0cmljcywgcGF0aCA9ICJtZXRyaWNzLnhsc3giKQojIHByZWRpY3Rpb25zCndyaXRlX3hsc3goZGYsIHBhdGggPSAicHJlZGljdGlvbnMueGxzeCIpCmBgYAoKYGBge3J9CmJlZXAoImNvbXBsZXRlIikKYGBgCgpgYGB7cn0KI0NvbmZ1c2lvbiBNYXRyaXggQ2hlY2sKZGYgJT4lCiAgY29uZl9tYXQodHJ1dGggPSBDbGFzcywgZXN0aW1hdGUgPSBwcmVkKSAlPiUKICBhdXRvcGxvdCh0eXBlID0gImhlYXRtYXAiKQpgYGAKCmBgYHtyfQp0cmVlX2ZpdCA8LSBtb2RlbF9maXQgJT4lCiAgcHVsbF93b3JrZmxvd19maXQoKQoKYGBgCgpgYGB7cn0KbGlicmFyeShycGFydC5wbG90KQpgYGAKCgpgYGB7cn0KcGRmKCJycGxvdC5wZGYiKQpycGFydC5wbG90KHRyZWVfZml0JGZpdCkKZGV2Lm9mZigpCmBgYAoKCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKIyBJTlNUQUxMIE1PREVMIExJQlJBUlkKCmBgYHtyfQojIEltcG9ydCBMaWJyYXJpZXMKbGlicmFyeSh0aWR5dmVyc2UpCmxpYnJhcnkodGlkeXRleHQpCmxpYnJhcnkodGlkeW1vZGVscykKbGlicmFyeShkaXNjcmltKSAjIG5lZWRlZCBmb3IgTmFpdmUgQmF5ZXMKbGlicmFyeSh0ZXh0cmVjaXBlcykKbGlicmFyeSh0aWN0b2MpCmxpYnJhcnkoYmVlcHIpCmxpYnJhcnkod3JpdGV4bCkKYGBgCgpOb3RlIGlmIHlvdSBhcmUgcHVsbGluZyB0aGlzIGZyb20gdGhlIEdpdGh1YiByZXBvc2l0b3J5LCBwbGVhc2UgcmVhZCBSRUFETUUgZm9yIGUzX3RyYWluX2ZvbGRzLm1kIHRvIGdldCB0aGUgbmVlZGVkIGZpbGUgYmVsb3cKCmBgYHtyfQojIEltcG9ydCBEYXRhCmVfc3BsaXQgPC0gcmVhZFJEUygiZTNfc3BsaXQuUkRTIikKZV90cmFpbiA8LSByZWFkUkRTKCJlM190cmFpbi5SRFMiKSAjIHNlZSBSRUFETUUgZm9yIGUzX3RyYWluX2ZvbGRzLm1kIGluIGdpdGh1YiByZXBvc2l0b3J5CmVfdGVzdCA8LSByZWFkUkRTKCJlM190ZXN0LlJEUyIpCnRyYWluX2ZvbGRzIDwtIHJlYWRSRFMoImUzX3RyYWluX2ZvbGRzLlJEUyIpCmBgYAoKYGBge3J9CiMgQ2hlY2sgc2l6ZSBvZiB0ZXN0IHNldCByZWxhdGl2ZSB0byB0cmFpbmluZyBzZXQKIzE1MC8oMjQyKzE1MCkKYGBgCgpgYGB7cn0KY2xhc3NpZmljYXRpb25fbWVhc3VyZSA8LSBtZXRyaWNfc2V0KGFjY3VyYWN5LCBwcmVjaXNpb24sIHJlY2FsbCwgZl9tZWFzLCByb2NfYXVjLCBucHYsIHNwZWNpZmljaXR5KQpgYGAKCmBgYHtyfQplX3ByZXByb2Nlc3NpbmcgPC0KICByZWNpcGUoQ2xhc3MgfiB0eHQsICMgTW9kZWwgVGFyZ2V0IFZhcmlhYmxlID0gQ2xhc3MsIFByZWRpY3RvciBWYXJpYWJsZSA9IFR4dAogICAgICAgICBkYXRhID0gZV90cmFpbiAjIGVzdGltYXRlZCB1cG9uIHRyYWluaW5nIHNldCBhbmQgYXJlIGFwcGxpZWQgdGhlIHNhbWUgd2F5IG9uIHRoZSB0ZXN0IHNldAogICkKYGBgCgojIFVQREFURSBQUkVQUk9DRVNTT1IgSFlQRVJQQVJBTUVURVJTCgpgYGB7cn0KIyBVUERBVEUgRk9SIEVBQ0ggTU9ERUwKZV9wcmVwcm9jZXNzaW5nIDwtIGVfcHJlcHJvY2Vzc2luZyAlPiUKICBzdGVwX3Rva2VuaXplKHR4dCwgdG9rZW4gPSAibmdyYW1zIiwgb3B0aW9ucyA9IGxpc3QobiA9IDIsIG5fbWluID0gMSkpICU+JSAjIG4tZ3JhbSB0b2tlbmlzZXIgc2V0IGJlc3QgcGFyYW0KICBzdGVwX3N0b3B3b3Jkcyh0eHQpICU+JSAKICBzdGVwX3Rva2VuZmlsdGVyKHR4dCwgbWluX3RpbWVzID0gMiwgbWF4X3Rva2VucyA9IDEyNTAwKSAlPiUgIyB0b2tlbiBrZWVwZXIvIHJlbW92ZXIgc2V0IGJlc3QgcGFyYW0KICBzdGVwX3RmKHR4dCkgJT4lICMgYmVzdCBwYXJhbWV0ZXIgCiAgc3RlcF9ub3JtYWxpemUoYWxsX3ByZWRpY3RvcnMoKSkgCmBgYAoKIyBVUERBVEUgTU9ERUwgV0lUSCBNT0RFTCBBTkQgSFlQRVJQQVJBTUVURVJTCgpgYGB7cn0KIyBVUERBVEUgRk9SIEVBQ0ggTU9ERUwKIyBGaW5hbCBNb2RlbCBTcGVjaWZpY2F0aW9ucwptb2RlbF9zcGVjIDwtZGVjaXNpb25fdHJlZShjb3N0X2NvbXBsZXhpdHkgPSAwLjAxKSAlPiUKICBzZXRfZW5naW5lKCJycGFydCIpICU+JQogIHNldF9tb2RlKCJjbGFzc2lmaWNhdGlvbiIpCgojIENyZWF0ZSB3b3JrZmxvdyBvYmplY3Qgd2l0aCBvbmx5IHRoZSBtb2RlbAptb2RlbF93ZiA8LSB3b3JrZmxvdygpICU+JQogIGFkZF9tb2RlbChtb2RlbF9zcGVjKQoKbW9kZWxfd2YgPC0gbW9kZWxfd2YgJT4lCiAgYWRkX3JlY2lwZShlX3ByZXByb2Nlc3NpbmcpCmBgYAoKYGBge3J9CiMgRmluYWwgRml0CnNldC5zZWVkKDEyMykKdGljKCkKIyBUcmFpbiBtb2RlbCBvbiB0cmFpbmluZyBkYXRhIAptb2RlbF9maXQgPC0gbW9kZWxfd2YgJT4lCiAgZml0KGRhdGEgPSBlX3RyYWluKQp0b2MoKQpgYGAKCmBgYHtyfQojIFRlc3QgIG1vZGVsIG9uIHRlc3QgZGF0YQpwcmVkIDwtIHByZWRpY3QobW9kZWxfZml0LCBuZXdfZGF0YSA9IGVfdGVzdCwgdHlwZSA9ICJjbGFzcyIpCiAgIyBpdCBpcyBzbWFydCBlbm91Z2ggdG8ga25vdyAidHh0IiBpcyBuZWVkZWQKYGBgCgpgYGB7cn0KI2NvbWJpbmUgdHJ1dGggd2l0aCBwcmVkCmRmIDwtIGNiaW5kKGVfdGVzdCwgcHJlZCA9IHByZWQkLnByZWRfY2xhc3MpCmBgYAoKYGBge3J9CmRmIDwtIGRmICU+JQogIHNlbGVjdChDbGFzcywgcHJlZCkKYGBgCgpgYGB7cn0KbXVsdGlfbWV0cmljIDwtIG1ldHJpY19zZXQoYWNjdXJhY3ksIHByZWNpc2lvbiwgcmVjYWxsLCBmX21lYXMsIG5wdiwgc3BlY2lmaWNpdHkpCmBgYAoKYGBge3J9Cm1ldHJpY3MgPC0gbXVsdGlfbWV0cmljKGRmLCB0cnV0aCA9IENsYXNzLCBlc3RpbWF0ZSA9IHByZWQpCmBgYAoKYGBge3J9CnByZWQyIDwtIHByZWRpY3QobW9kZWxfZml0LCBuZXdfZGF0YSA9IGVfdGVzdCwgdHlwZSA9ICJwcm9iIikKYGBgCgpgYGB7cn0KZGYgPC0gY2JpbmQoZGYsIHByZWQyKQpgYGAKCiMgTU9WRSBGSUxFUwoKYGBge3J9CiMgVVBEQVRFCiMgbWV0cmljcwp3cml0ZV94bHN4KG1ldHJpY3MsIHBhdGggPSAibWV0cmljcy54bHN4IikKIyBwcmVkaWN0aW9ucwp3cml0ZV94bHN4KGRmLCBwYXRoID0gInByZWRpY3Rpb25zLnhsc3giKQpgYGAKCmBgYHtyfQpiZWVwKCJjb21wbGV0ZSIpCmBgYAoKYGBge3J9CiNDb25mdXNpb24gTWF0cml4IENoZWNrCmRmICU+JQogIGNvbmZfbWF0KHRydXRoID0gQ2xhc3MsIGVzdGltYXRlID0gcHJlZCkgJT4lCiAgYXV0b3Bsb3QodHlwZSA9ICJoZWF0bWFwIikKYGBgCgpgYGB7cn0KdHJlZV9maXQgPC0gbW9kZWxfZml0ICU+JQogIHB1bGxfd29ya2Zsb3dfZml0KCkKCmBgYAoKYGBge3J9CmxpYnJhcnkocnBhcnQucGxvdCkKYGBgCgoKYGBge3J9CnBkZigicnBsb3QucGRmIikKcnBhcnQucGxvdCh0cmVlX2ZpdCRmaXQpCmRldi5vZmYoKQpgYGAKCgo=</div>
 
 
 
@@ -2054,7 +2336,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("RQ 2.1 Final Model.Rmd");
+  window.initializeSourceEmbed("BC.1 Final Model.Rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>
