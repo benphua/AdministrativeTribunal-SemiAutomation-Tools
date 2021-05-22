@@ -4,9 +4,7 @@
 
 # Table of Contents
 
-TBC, 
-
-(Self note: See https://gist.githubusercontent.com/jonschlinkert/ac5d8122bfaaa394f896/raw/bd1106691cf344e972f575c49ba3cf281beeb9b3/markdown-toc_repeated-headings.md for examples.)
+TBC.
 
 <br>
 
